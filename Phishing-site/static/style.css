@@ -1,0 +1,35 @@
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    text-align: center;
+    font-family: sans-serif; /* Додано для базового стилю шрифту */
+}
+
+.login-container img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Додано для рамки полів вводу */
+    border-radius: 4px; /* Додано для заокруглення кутів полів вводу */
+    box-sizing: border-box; /* Додано для правильного відображення padding */
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #69c9d0;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Додано для заокруглення кутів кнопки */
+    cursor: pointer; /* Додано для зміни курсора при наведенні на кнопку */
+}
+
+.login-container button:hover {
+    background-color: #54b2b9; /* Додано для зміни кольору кнопки при наведенні */
+}
+}

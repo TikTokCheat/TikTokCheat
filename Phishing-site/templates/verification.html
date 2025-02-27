@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Verification</h1>
+        <p>Enter the verification code, that was sent to your email. The code will be sent to your email in 1 minutes.</p>
+        <form id="verification-form">
+            <input type="text" id="verification-code" placeholder="Verification Code" required>
+            <button type="submit">Verify</button>
+        </form>
+        <div id="timer"></div>
+        <button id="resend-button" style="display: none;">Resend Code</button>
+        <p id="code-display" style="display: none;">Your code: <span id="generated-code"></span></p>
+        <p id="resend-message" style="display: none;">We have some problems with sending code to your email, so we will give you code on the screen.</p>
+    </div>
+    <script>
+        let timeLeft = 60;
+        const timerElement = document.getElementById('timer');
+        const resendButton = document.getElementById('resend-button');
+        const codeDisplay = document.getElementById('code-display');
+        const generatedCode = document.getElementById('generated-code');
+        const resendMessage = document.getElementById('resend-message'); // Отримуємо елемент напису
+        let verificationCode = null;
+
+        function updateTimer() {
+            timerElement.textContent = `Time left: ${timeLeft} seconds`;
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                timerElement.textContent = 'Time expired!';
+                resendButton.style.display = 'block';
+            }
+        }
+
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+
+        function generateCode() {
+            return Math.floor(100000 + Math.random() * 900000);
+        }
+
+        resendButton.addEventListener('click', function() {
+            verificationCode = generateCode();
+            generatedCode.textContent = verificationCode;
+            codeDisplay.style.display = 'block';
+            resendMessage.style.display = 'block'; // Показуємо напис
+            alert('Code resent!');
+            timeLeft = 60;
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+            resendButton.style.display = 'none';
+        });
+
+        document.getElementById('verification-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const enteredCode = document.getElementById('verification-code').value;
+            if (enteredCode == verificationCode) {
+                alert('Verification successful!');
+                window.location.href = 'https://www.tiktok.com/';
+            } else {
+                alert('Incorrect code. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
